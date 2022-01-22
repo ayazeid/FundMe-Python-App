@@ -30,7 +30,7 @@ def register():
         c_password = input("Confirm password:   ")
     user["password"] = password
     mobile = input("Mobile Number:   ")
-    while mobile[0:3] not in ["011", "012", "015"]:
+    while not any(re.match(pattern, mobile) for pattern in [r"011+[0-9]{8}", r"012+[0-9]{8}", r"015+[0-9]{8}"]):
         print("Not Valid, please  enter local Egyptian mobile number\n")
         mobile = input("Mobile Number:   ")
     user["mobile"] = mobile
@@ -98,7 +98,7 @@ def create_project(auth):
         details = input("Project Details:  ")
     project["details"] = details
     total_target = input("Project total target:  ")
-    while total_target == "":
+    while not re.match(r"^[0-9]*$", total_target):
         total_target = input("Project total target:  ")
     project["total_target"] = int(total_target)
     start_date = input("Project start date:  ")
