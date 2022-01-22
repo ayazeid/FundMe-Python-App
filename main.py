@@ -14,6 +14,7 @@ import os
 # • Mobile phone [validated against Egyptian phone numbers]
 def register():
     user = {}
+    exist = False
     user["firstname"] = input("First Name:   ")
     user["lastname"] = input("last Name:   ")
     email = input("Email:   ")
@@ -33,9 +34,17 @@ def register():
         print("Not Valid, please  enter local Egyptian mobile number\n")
         mobile = input("Mobile Number:   ")
     user["mobile"] = mobile
-    print("Registered successfully.")
-    with open("users", "a") as users:
-        users.write(f"{user}\n")
+    with open("users", "r") as users:
+        for u in users:
+            res = ast.literal_eval(u)
+            if res["email"] == user["email"]:
+                print("This email exist, if you have an account please login.\n")
+                exist = True
+                break
+    if not exist:
+        with open("users", "a") as users:
+            users.write(f"{user}\n")
+            print("Registered successfully.")
 
 
 # register()
@@ -205,6 +214,7 @@ def project_menu(loged):
         project_menu(loged)
     elif selection == "5":
         return False
+
 
 ######################
 # app screen function
