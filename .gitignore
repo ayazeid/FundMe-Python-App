@@ -1,9 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # misc
 .DS_Store
-projects
-users
-
+data
 .idea
 # Byte-compiled / optimized / DLL files
 __pycache__/
