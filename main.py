@@ -1,6 +1,7 @@
 # imports
 from modules.auth import register, login
 from modules.project_module import create_project, view_projects, search_project, delete_project
+import os
 
 
 # project menu
@@ -33,6 +34,10 @@ def project_menu(loged):
 ######################
 # app screen function
 def app():
+    # check data directory users , projects files exist
+    cmd = "if ! [ -d data ]; then mkdir data; touch data/projects data/users; fi; if ! [ -f data/projects ]; then " \
+          "touch data/projects; fi; if ! [ -f data/users ]; then touch data/users; fi; "
+    os.system(cmd)
     print("---------Welcome to FundMe App----------\n")
     authsys = input("Enter a number from the following menu to select.\n1 -Register.\n2 - Login.\n3 - Exit\n")
     while authsys not in ["1", "2", "3"]:
